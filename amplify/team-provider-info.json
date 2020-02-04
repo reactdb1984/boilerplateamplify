@@ -1,0 +1,20 @@
+{
+    "emark": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-emark-emark-151757-authRole",
+            "UnauthRoleArn": "arn:aws:iam::246686788744:role/amplify-emark-emark-151757-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::246686788744:role/amplify-emark-emark-151757-authRole",
+            "Region": "eu-central-1",
+            "DeploymentBucketName": "amplify-emark-emark-151757-deployment",
+            "UnauthRoleName": "amplify-emark-emark-151757-unauthRole",
+            "StackName": "amplify-emark-emark-151757",
+            "StackId": "arn:aws:cloudformation:eu-central-1:246686788744:stack/amplify-emark-emark-151757/fb61f4f0-468f-11ea-9f1e-0264b9b54242",
+            "AmplifyAppId": "d18o53tkzw15nc"
+        },
+        "categories": {
+            "auth": {
+                "emark839ad6db": {}
+            }
+        }
+    }
+}
