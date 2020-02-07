@@ -4,12 +4,14 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import HomePage from "../../views/HomePage/HomePage";
 import { Auth } from "aws-amplify";
 import SignIn from "../../components/auth/SignIn";
+import NavBar from "../../components/nav";
 
 function App({location}) {
-  Auth.currentAuthenticatedUser()
+ const result =async ()=>{
+  const user = await Auth.currentAuthenticatedUser()
  
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
+  console.log(user.attributes.sub)}
+    result()
 
   return (
     <>
@@ -17,10 +19,13 @@ function App({location}) {
       <Route
         path="/(.+)"
         render={() => (
+          <>
+          <NavBar/>
           <Switch key={location.key}>
             <Route exact path="/register" component={RegisterUser} />
             <Route exact path="/signin" component={SignIn} />
           </Switch>
+          </>
         )}
       />
     </>

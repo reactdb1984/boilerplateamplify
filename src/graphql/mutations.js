@@ -1,181 +1,36 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createMarket = `mutation CreateMarket(
-  $input: CreateMarketInput!
-  $condition: ModelMarketConditionInput
-) {
-  createMarket(input: $input, condition: $condition) {
-    id
-    name
-    products {
-      items {
-        id
-        description
-        price
-        shipped
-        owner
-        createdAt
-      }
-      nextToken
-    }
-    tags
-    owner
-    createdAt
-  }
-}
-`;
-export const updateMarket = `mutation UpdateMarket(
-  $input: UpdateMarketInput!
-  $condition: ModelMarketConditionInput
-) {
-  updateMarket(input: $input, condition: $condition) {
-    id
-    name
-    products {
-      items {
-        id
-        description
-        price
-        shipped
-        owner
-        createdAt
-      }
-      nextToken
-    }
-    tags
-    owner
-    createdAt
-  }
-}
-`;
-export const deleteMarket = `mutation DeleteMarket(
-  $input: DeleteMarketInput!
-  $condition: ModelMarketConditionInput
-) {
-  deleteMarket(input: $input, condition: $condition) {
-    id
-    name
-    products {
-      items {
-        id
-        description
-        price
-        shipped
-        owner
-        createdAt
-      }
-      nextToken
-    }
-    tags
-    owner
-    createdAt
-  }
-}
-`;
-export const createProduct = `mutation CreateProduct(
-  $input: CreateProductInput!
-  $condition: ModelProductConditionInput
-) {
-  createProduct(input: $input, condition: $condition) {
-    id
-    description
-    market {
-      id
-      name
-      products {
-        nextToken
-      }
-      tags
-      owner
-      createdAt
-    }
-    file {
-      bucket
-      region
-      key
-    }
-    price
-    shipped
-    owner
-    createdAt
-  }
-}
-`;
-export const updateProduct = `mutation UpdateProduct(
-  $input: UpdateProductInput!
-  $condition: ModelProductConditionInput
-) {
-  updateProduct(input: $input, condition: $condition) {
-    id
-    description
-    market {
-      id
-      name
-      products {
-        nextToken
-      }
-      tags
-      owner
-      createdAt
-    }
-    file {
-      bucket
-      region
-      key
-    }
-    price
-    shipped
-    owner
-    createdAt
-  }
-}
-`;
-export const deleteProduct = `mutation DeleteProduct(
-  $input: DeleteProductInput!
-  $condition: ModelProductConditionInput
-) {
-  deleteProduct(input: $input, condition: $condition) {
-    id
-    description
-    market {
-      id
-      name
-      products {
-        nextToken
-      }
-      tags
-      owner
-      createdAt
-    }
-    file {
-      bucket
-      region
-      key
-    }
-    price
-    shipped
-    owner
-    createdAt
-  }
-}
-`;
-export const registerUser = `mutation RegisterUser(
+export const createUser = `mutation CreateUser(
   $input: CreateUserInput!
   $condition: ModelUserConditionInput
 ) {
-  registerUser(input: $input, condition: $condition) {
+  createUser(input: $input, condition: $condition) {
     id
     username
-    email
-    registered
-    orders {
+    conversations {
       items {
         id
+        convoLinkUserId
+        convoLinkConversationId
         createdAt
+        updatedAt
       }
       nextToken
     }
+    messages {
+      items {
+        id
+        authorId
+        content
+        messageConversationId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
   }
 }
 `;
@@ -183,63 +38,292 @@ export const updateUser = `mutation UpdateUser(
   $input: UpdateUserInput!
   $condition: ModelUserConditionInput
 ) {
-  UpdateUser(input: $input, condition: $condition) {
+  updateUser(input: $input, condition: $condition) {
     id
     username
-    email
-    registered
-    orders {
+    conversations {
       items {
         id
+        convoLinkUserId
+        convoLinkConversationId
         createdAt
+        updatedAt
       }
       nextToken
     }
+    messages {
+      items {
+        id
+        authorId
+        content
+        messageConversationId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
   }
 }
 `;
-export const createOrder = `mutation CreateOrder(
-  $input: CreateOrderInput!
-  $condition: ModelOrderConditionInput
+export const deleteUser = `mutation DeleteUser(
+  $input: DeleteUserInput!
+  $condition: ModelUserConditionInput
 ) {
-  createOrder(input: $input, condition: $condition) {
+  deleteUser(input: $input, condition: $condition) {
     id
-    product {
-      id
-      description
-      market {
+    username
+    conversations {
+      items {
         id
-        name
-        tags
-        owner
+        convoLinkUserId
+        convoLinkConversationId
         createdAt
+        updatedAt
       }
-      file {
-        bucket
-        region
-        key
-      }
-      price
-      shipped
-      owner
-      createdAt
+      nextToken
     }
+    messages {
+      items {
+        id
+        authorId
+        content
+        messageConversationId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+`;
+export const createConvo = `mutation CreateConvo(
+  $input: CreateConversationInput!
+  $condition: ModelConversationConditionInput
+) {
+  createConvo(input: $input, condition: $condition) {
+    id
+    messages {
+      items {
+        id
+        authorId
+        content
+        messageConversationId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    associated {
+      items {
+        id
+        convoLinkUserId
+        convoLinkConversationId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    name
+    members
+    createdAt
+    updatedAt
+  }
+}
+`;
+export const createMessage = `mutation CreateMessage(
+  $input: CreateMessageInput!
+  $condition: ModelMessageConditionInput
+) {
+  createMessage(input: $input, condition: $condition) {
+    id
+    author {
+      id
+      username
+      conversations {
+        nextToken
+      }
+      messages {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    authorId
+    content
+    conversation {
+      id
+      messages {
+        nextToken
+      }
+      associated {
+        nextToken
+      }
+      name
+      members
+      createdAt
+      updatedAt
+    }
+    messageConversationId
+    createdAt
+    updatedAt
+  }
+}
+`;
+export const updateMessage = `mutation UpdateMessage(
+  $input: UpdateMessageInput!
+  $condition: ModelMessageConditionInput
+) {
+  updateMessage(input: $input, condition: $condition) {
+    id
+    author {
+      id
+      username
+      conversations {
+        nextToken
+      }
+      messages {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    authorId
+    content
+    conversation {
+      id
+      messages {
+        nextToken
+      }
+      associated {
+        nextToken
+      }
+      name
+      members
+      createdAt
+      updatedAt
+    }
+    messageConversationId
+    createdAt
+    updatedAt
+  }
+}
+`;
+export const deleteMessage = `mutation DeleteMessage(
+  $input: DeleteMessageInput!
+  $condition: ModelMessageConditionInput
+) {
+  deleteMessage(input: $input, condition: $condition) {
+    id
+    author {
+      id
+      username
+      conversations {
+        nextToken
+      }
+      messages {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    authorId
+    content
+    conversation {
+      id
+      messages {
+        nextToken
+      }
+      associated {
+        nextToken
+      }
+      name
+      members
+      createdAt
+      updatedAt
+    }
+    messageConversationId
+    createdAt
+    updatedAt
+  }
+}
+`;
+export const createConvoLink = `mutation CreateConvoLink(
+  $input: CreateConvoLinkInput!
+  $condition: ModelConvoLinkConditionInput
+) {
+  createConvoLink(input: $input, condition: $condition) {
+    id
     user {
       id
       username
-      email
-      registered
-      orders {
+      conversations {
         nextToken
       }
+      messages {
+        nextToken
+      }
+      createdAt
+      updatedAt
     }
-    shippingAddress {
-      city
-      country
-      address_line1
-      postCode
+    convoLinkUserId
+    conversation {
+      id
+      messages {
+        nextToken
+      }
+      associated {
+        nextToken
+      }
+      name
+      members
+      createdAt
+      updatedAt
     }
+    convoLinkConversationId
     createdAt
+    updatedAt
+  }
+}
+`;
+export const updateConvoLink = `mutation UpdateConvoLink(
+  $input: UpdateConvoLinkInput!
+  $condition: ModelConvoLinkConditionInput
+) {
+  updateConvoLink(input: $input, condition: $condition) {
+    id
+    user {
+      id
+      username
+      conversations {
+        nextToken
+      }
+      messages {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    convoLinkUserId
+    conversation {
+      id
+      messages {
+        nextToken
+      }
+      associated {
+        nextToken
+      }
+      name
+      members
+      createdAt
+      updatedAt
+    }
+    convoLinkConversationId
+    createdAt
+    updatedAt
   }
 }
 `;

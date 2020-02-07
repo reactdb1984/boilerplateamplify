@@ -1,144 +1,164 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateMarket = `subscription OnCreateMarket {
-  onCreateMarket {
+export const onCreateConvoLink = `subscription OnCreateConvoLink($convoLinkUserId: ID!) {
+  onCreateConvoLink(convoLinkUserId: $convoLinkUserId) {
     id
-    name
-    products {
+    user {
+      id
+      username
+      conversations {
+        nextToken
+      }
+      messages {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    convoLinkUserId
+    conversation {
+      id
+      messages {
+        nextToken
+      }
+      associated {
+        nextToken
+      }
+      name
+      members
+      createdAt
+      updatedAt
+    }
+    convoLinkConversationId
+    createdAt
+    updatedAt
+  }
+}
+`;
+export const onCreateMessage = `subscription OnCreateMessage($messageConversationId: ID!) {
+  onCreateMessage(messageConversationId: $messageConversationId) {
+    id
+    author {
+      id
+      username
+      conversations {
+        nextToken
+      }
+      messages {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    authorId
+    content
+    conversation {
+      id
+      messages {
+        nextToken
+      }
+      associated {
+        nextToken
+      }
+      name
+      members
+      createdAt
+      updatedAt
+    }
+    messageConversationId
+    createdAt
+    updatedAt
+  }
+}
+`;
+export const onCreateUser = `subscription OnCreateUser {
+  onCreateUser {
+    id
+    username
+    conversations {
       items {
         id
-        description
-        price
-        shipped
-        owner
+        convoLinkUserId
+        convoLinkConversationId
         createdAt
+        updatedAt
       }
       nextToken
     }
-    tags
-    owner
-    createdAt
-  }
-}
-`;
-export const onUpdateMarket = `subscription OnUpdateMarket {
-  onUpdateMarket {
-    id
-    name
-    products {
+    messages {
       items {
         id
-        description
-        price
-        shipped
-        owner
+        authorId
+        content
+        messageConversationId
         createdAt
+        updatedAt
       }
       nextToken
     }
-    tags
-    owner
     createdAt
+    updatedAt
   }
 }
 `;
-export const onDeleteMarket = `subscription OnDeleteMarket {
-  onDeleteMarket {
+export const onUpdateUser = `subscription OnUpdateUser {
+  onUpdateUser {
     id
-    name
-    products {
+    username
+    conversations {
       items {
         id
-        description
-        price
-        shipped
-        owner
+        convoLinkUserId
+        convoLinkConversationId
         createdAt
+        updatedAt
       }
       nextToken
     }
-    tags
-    owner
+    messages {
+      items {
+        id
+        authorId
+        content
+        messageConversationId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
+    updatedAt
   }
 }
 `;
-export const onCreateProduct = `subscription OnCreateProduct($owner: String!) {
-  onCreateProduct(owner: $owner) {
+export const onDeleteUser = `subscription OnDeleteUser {
+  onDeleteUser {
     id
-    description
-    market {
-      id
-      name
-      products {
-        nextToken
+    username
+    conversations {
+      items {
+        id
+        convoLinkUserId
+        convoLinkConversationId
+        createdAt
+        updatedAt
       }
-      tags
-      owner
-      createdAt
+      nextToken
     }
-    file {
-      bucket
-      region
-      key
-    }
-    price
-    shipped
-    owner
-    createdAt
-  }
-}
-`;
-export const onUpdateProduct = `subscription OnUpdateProduct($owner: String!) {
-  onUpdateProduct(owner: $owner) {
-    id
-    description
-    market {
-      id
-      name
-      products {
-        nextToken
+    messages {
+      items {
+        id
+        authorId
+        content
+        messageConversationId
+        createdAt
+        updatedAt
       }
-      tags
-      owner
-      createdAt
+      nextToken
     }
-    file {
-      bucket
-      region
-      key
-    }
-    price
-    shipped
-    owner
     createdAt
-  }
-}
-`;
-export const onDeleteProduct = `subscription OnDeleteProduct($owner: String!) {
-  onDeleteProduct(owner: $owner) {
-    id
-    description
-    market {
-      id
-      name
-      products {
-        nextToken
-      }
-      tags
-      owner
-      createdAt
-    }
-    file {
-      bucket
-      region
-      key
-    }
-    price
-    shipped
-    owner
-    createdAt
+    updatedAt
   }
 }
 `;

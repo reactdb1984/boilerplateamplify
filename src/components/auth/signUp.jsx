@@ -1,38 +1,50 @@
-import React from 'react'
-import { Field, reduxForm } from 'redux-form'
-import { combineValidators, isRequired } from 'revalidate';
-import { connect } from 'react-redux';
+import React from "react";
+import { Field, reduxForm } from "redux-form";
+import { useDispatch } from "react-redux";
 
-import { signUp } from './authActions'
+import { combineValidators, isRequired } from "revalidate";
+import { API, graphqlOperation } from "aws-amplify";
+import { createUser } from "../../graphql/mutations";
 
-const actions = {
-    signUp
+import { Register } from "./authActions";
+
+const validate = combineValidators({
+  username: isRequired("username"),
+  email: isRequired("email"),
+  password: isRequired("password")
+});
+
+const SignUp = ({ handleSubmit, pristine, reset, submitting, signUp }) => {
+  const dispatch = useDispatch();
+  const handleFormSubmit = async user => {
+    try {
+      dispatch(Register(user));
+
+      const input = {
+        id: "1",
+        username: "dace",
+        createdAt: "Now"
+      };
+      await API.graphql(graphqlOperation(createUser, { input }));
+    } catch (err) {
+      console.log(err);
+    }
   };
-
-  const validate = combineValidators({
-    username: isRequired('username'),
-    email: isRequired('email'),
-    password: isRequired('password')
-  }); 
-
-const SignUp = ({handleSubmit, pristine, reset, submitting, signUp }) => {
-    return(
+  return (
+    <div>
+      <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div>
-
-<form onSubmit={handleSubmit(signUp)}>
-      <div>
-        <label>user name</label>
-        <div>
-          <Field
-            name="username"
-            component="input"
-            type="text"
-            placeholder="username"
-          />
+          <label>user name</label>
+          <div>
+            <Field
+              name="username"
+              component="input"
+              type="text"
+              placeholder="username"
+            />
+          </div>
         </div>
-      </div>
-      <div>
-          
+        <div>
           <label>email</label>
           <div>
             <Field
@@ -43,44 +55,34 @@ const SignUp = ({handleSubmit, pristine, reset, submitting, signUp }) => {
             />
           </div>
         </div>
-      <div>
-          
-        <label>password</label>
         <div>
-          <Field
-            name="password"
-            component="input"
-            type="password"
-            placeholder="password"
-          />
+          <label>password</label>
+          <div>
+            <Field
+              name="password"
+              component="input"
+              type="password"
+              placeholder="password"
+            />
+          </div>
         </div>
-      </div>
-      <div>
- 
-       
-      </div>
- 
-  
-      <div>
-        <button type="submit" disabled={pristine || submitting}>
-          Submit
-        </button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>
-          Clear Values
-        </button>
-      </div>
-    </form>
+        <div></div>
+
+        <div>
+          <button type="submit" disabled={pristine || submitting}>
+            Submit
+          </button>
+          <button
+            type="button"
+            disabled={pristine || submitting}
+            onClick={reset}
+          >
+            Clear Values
+          </button>
+        </div>
+      </form>
     </div>
-    )
-}
+  );
+};
 
-
-
-
-
-
-  export default connect(
-    null,
-    actions
-  )(reduxForm({ form: 'registerForm', validate })(SignUp));
-  
+export default reduxForm({ form: "registerForm", validate })(SignUp);
